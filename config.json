@@ -1,0 +1,12 @@
+{
+    "items": [
+        {
+            "name": "My Item",
+            "base_shop_url": "https://en.knis-kyoto.com",
+            "product_handle": "kn005-kjbkle",
+            "product_url": "https://en.knis-kyoto.com/products/kn005-kjbkle",
+            "available": null,
+            "notified": false
+        }
+    ]
+}
