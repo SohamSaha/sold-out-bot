@@ -30,8 +30,7 @@ async def check_stock():
         if p["handle"] == item["product_handle"]:
             variants = p["variants"]
     
-    for v in variants:
-        in_stock = any(v.get("available") for v in variants)
+    in_stock = any(v.get("available") for v in variants)
         if (in_stock) and (item["notified"] == False):
             user = await client.fetch_user(NOTIFY_USER_ID)
             await user.send(f"Item is back in stock! {item['product_url']}")
