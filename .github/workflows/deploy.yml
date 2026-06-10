@@ -41,6 +41,11 @@ jobs:
       - name: Wait for Tailscale
         run: sleep 10
 
+      - name: Debug Tailscale
+        run: |
+          tailscale status
+          ping -c 3 ${{ secrets.PI_HOST }} || echo "Ping failed"
+
       - name: Deploy to Pi
         uses: appleboy/ssh-action@v1
         with:
