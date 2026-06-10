@@ -43,7 +43,8 @@ jobs:
 
       - name: Debug Tailscale
         run: |
-          tailscale status
+          sudo tailscale status
+          sudo tailscale ip
           ping -c 3 ${{ secrets.PI_HOST }} || echo "Ping failed"
 
       - name: Deploy to Pi
