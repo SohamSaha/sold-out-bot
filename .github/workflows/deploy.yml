@@ -38,6 +38,9 @@ jobs:
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
 
+      - name: Wait for Tailscale
+        run: sleep 10
+
       - name: Deploy to Pi
         uses: appleboy/ssh-action@v1
         with:
