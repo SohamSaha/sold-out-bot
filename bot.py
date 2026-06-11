@@ -17,20 +17,21 @@ client = discord.Client(intents=intents)
 
 @tasks.loop(seconds=60)
 async def check_stock():
-    item = config["items"][0]
-    url = f"{item['base_shop_url']}/products.json"
+    for i in range(len(config["items"])):
+        item = config["items"][i]
+        url = f"{item['base_shop_url']}/products.json"
 
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url) as resp:
-            data = await resp.json()
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url) as resp:
+                data = await resp.json()
 
-    products = data["products"]
-    for p in products:
-        p.get("handle")
-        if p["handle"] == item["product_handle"]:
-            variants = p["variants"]
-    
-    in_stock = any(v.get("available") for v in variants)
+        products = data["products"]
+        for p in products:
+            p.get("handle")
+            if p["handle"] == item["product_handle"]:
+                variants = p["variants"]
+        
+        in_stock = any(v.get("available") for v in variants)
         if (in_stock) and (item["notified"] == False):
             user = await client.fetch_user(NOTIFY_USER_ID)
             await user.send(f"Item is back in stock! {item['product_url']}")
